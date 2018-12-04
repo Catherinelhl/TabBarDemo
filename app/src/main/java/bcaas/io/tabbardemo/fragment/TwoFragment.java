@@ -1,5 +1,6 @@
 package bcaas.io.tabbardemo.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import bcaas.io.tabbardemo.R;
 import bcaas.io.tabbardemo.maker.DataGenerationRegister;
+import bcaas.io.tabbardemo.view.RichText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -21,6 +23,8 @@ import butterknife.Unbinder;
  */
 public class TwoFragment extends Fragment {
 
+    @BindView(R.id.rt_text)
+    RichText rtText;
     private DataGenerationRegister dataGenerationRegister;
 
     @BindView(R.id.tv_text)
@@ -40,7 +44,7 @@ public class TwoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dataGenerationRegister=new DataGenerationRegister();
+        dataGenerationRegister = new DataGenerationRegister();
         initListener();
         initTopTab();
 
@@ -53,7 +57,7 @@ public class TwoFragment extends Fragment {
         }
     }
 
-    private void initListener(){
+    private void initListener() {
         topTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -70,7 +74,20 @@ public class TwoFragment extends Fragment {
 
             }
         });
+        rtText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable top = getResources().getDrawable(count % 2 != 0 ? R.drawable.icon_home : R.drawable.icon_home_f);
+                rtText.setCompoundDrawablesWithIntrinsicBounds(null, top, null, null);
+                rtText.setTextColor(getResources().getColor(count % 2 != 0 ? R.color.colorPrimary : R.color.colorAccent));
+                count++;
+
+            }
+        });
     }
+
+    int count;
+
     private void initTopTab() {
 
 //        ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.colorAccent));

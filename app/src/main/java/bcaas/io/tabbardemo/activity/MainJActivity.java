@@ -1,5 +1,6 @@
 package bcaas.io.tabbardemo.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -52,8 +53,10 @@ public class MainJActivity extends AppCompatActivity {
                 tab.getCustomView().findViewById(R.id.ll_tab_item).setSelected(true);
                 TextView textView = tab.getCustomView().findViewById(R.id.tv_tab_title);
                 textView.setTextColor(getResources().getColor(R.color.colorAccent));
-                ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
-                imageView.setImageResource(R.drawable.icon_home_f);
+//                ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
+//                imageView.setImageResource(R.drawable.icon_home_f);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, getDrawableTop(tab.getPosition(), true), null, null);
+
                 //改变Tab 状态
 //                for (int i = 0; i < bottomTabLayout.getTabCount(); i++) {
 //                    bottomTabLayout.getTabAt(i).setIcon(getResources().getDrawable(dataGenerationRegister.getTabDrawable(i, i == tab.getPosition())));
@@ -66,16 +69,20 @@ public class MainJActivity extends AppCompatActivity {
                 tab.getCustomView().findViewById(R.id.ll_tab_item).setSelected(false);
                 TextView textView = tab.getCustomView().findViewById(R.id.tv_tab_title);
                 textView.setTextColor(getResources().getColor(R.color.grey));
-                ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
-                imageView.setImageResource(R.drawable.icon_home);
+//                ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
+//                imageView.setImageResource(R.drawable.icon_home);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, getDrawableTop(tab.getPosition(), false), null, null);
+
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 TextView textView = tab.getCustomView().findViewById(R.id.tv_tab_title);
                 textView.setTextColor(getResources().getColor(R.color.colorAccent));
-                ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
-                imageView.setImageResource(R.drawable.icon_home_f);
+//                ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
+//                imageView.setImageResource(R.drawable.icon_home_f);
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, getDrawableTop(tab.getPosition(), true), null, null);
+
             }
         });
     }
@@ -106,22 +113,32 @@ public class MainJActivity extends AppCompatActivity {
 //            tab.setIcon(getResources().getDrawable(dataGenerationRegister.getTabDrawable(i, false)));
 //            tab.setText(dataGenerationRegister.getTabTitle(i));
 //            //自定义布局-----
+
             tab.setCustomView(R.layout.tab_item);
             TextView textView = tab.getCustomView().findViewById(R.id.tv_tab_title);
             textView.setTextColor(getResources().getColor(R.color.grey));
-            ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
-            imageView.setImageResource(dataGenerationRegister.getTabDrawable(i, false));
+            textView.setCompoundDrawablesWithIntrinsicBounds(null, getDrawableTop(i, false), null, null);
+//            ImageView imageView = tab.getCustomView().findViewById(R.id.iv_tab_drawable);
+//            imageView.setImageResource(dataGenerationRegister.getTabDrawable(i, false));
             textView.setText(dataGenerationRegister.getTabTitle(i));
             //自定义布局-----
 
             bottomTabLayout.addTab(tab);
             if (i == 0) {
                 tab.getCustomView().findViewById(R.id.ll_tab_item).setSelected(true);
-                imageView.setImageResource(dataGenerationRegister.getTabDrawable(i, true));
+//                imageView.setImageResource(dataGenerationRegister.getTabDrawable(i, true));
                 textView.setTextColor(getResources().getColor(R.color.colorAccent));
+                textView.setCompoundDrawablesWithIntrinsicBounds(null, getDrawableTop(0, true), null, null);
+
 
             }
         }
+    }
+
+    private Drawable getDrawableTop(int i, boolean isFocus) {
+        Drawable top= getResources().getDrawable(dataGenerationRegister.getTabDrawable(i, isFocus));
+        return top;
+
     }
 
 
