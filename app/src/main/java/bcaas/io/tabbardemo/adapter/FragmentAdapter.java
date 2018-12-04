@@ -1,4 +1,4 @@
-package bcaas.io.tabbardemo;
+package bcaas.io.tabbardemo.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

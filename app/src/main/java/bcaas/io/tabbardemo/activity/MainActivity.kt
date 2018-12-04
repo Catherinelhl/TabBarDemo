@@ -1,7 +1,8 @@
-package bcaas.io.tabbardemo
+package bcaas.io.tabbardemo.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import bcaas.io.tabbardemo.R
 
 class MainActivity : AppCompatActivity() {
 
