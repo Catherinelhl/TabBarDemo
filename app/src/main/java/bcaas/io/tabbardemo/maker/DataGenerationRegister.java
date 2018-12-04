@@ -14,6 +14,7 @@ import java.util.List;
 public class DataGenerationRegister {
 
     private List<String> tabTitles = new ArrayList<>();
+    private List<String> tabTopTitles = new ArrayList<>();
     private List<Integer> tabDrawables = new ArrayList<>();
     private List<Integer> tabFocusDrawables = new ArrayList<>();
     private int count;
@@ -29,6 +30,10 @@ public class DataGenerationRegister {
         tabTitles.add("订单");
         tabTitles.add("账户");
         count = tabTitles.size();
+        tabTopTitles.add("ETH");
+        tabTopTitles.add("BTC");
+        tabTopTitles.add("ZBB");
+
         tabDrawables.add(R.drawable.icon_home);
         tabDrawables.add(R.drawable.icon_home);
         tabDrawables.add(R.drawable.icon_home);
@@ -40,10 +45,18 @@ public class DataGenerationRegister {
     }
 
     public String getTabTitle(int position) {
+
         if (position >= count) {
             return "";
         }
         return tabTitles.get(position);
+    }
+
+    public String getTabTopTitle(int position) {
+        if (position >= tabTopTitles.size()) {
+            return "";
+        }
+        return tabTopTitles.get(position);
     }
 
     public int getTabDrawable(int position, boolean isSelect) {

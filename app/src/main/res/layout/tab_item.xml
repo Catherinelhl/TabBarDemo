@@ -4,13 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:id="@+id/ll_tab_item"
+        android:descendantFocusability="blocksDescendants"
         android:gravity="center"
         android:orientation="vertical"
         tools:context=".activity.MainActivity">
-    <ImageButton
-            android:id="@+id/ib_tab_drawable"
+    <ImageView
+            android:id="@+id/iv_tab_drawable"
             android:layout_width="30dp"
-            android:background="#00000000"
             android:layout_gravity="bottom|center_horizontal"
             android:scaleType="fitCenter"
             android:src="@drawable/selector_radio_button_home"
@@ -19,9 +20,8 @@
     <TextView
             android:id="@+id/tv_tab_title"
             android:layout_width="wrap_content"
-            android:text="asdfaf"
             android:layout_gravity="top|center_horizontal"
-            android:textSize="11sp"
+            android:textSize="10sp"
             android:layout_height="wrap_content"/>
 
 
