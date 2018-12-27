@@ -6,16 +6,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import bcaas.io.tabbardemo.R;
+import bcaas.io.tabbardemo.adapter.TabAdapter;
+import bcaas.io.tabbardemo.adapter.TabViewAdapter;
 import bcaas.io.tabbardemo.maker.DataGenerationRegister;
 import bcaas.io.tabbardemo.view.RichText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author catherine.brainwilliam
@@ -25,6 +31,8 @@ public class TwoFragment extends Fragment {
 
     @BindView(R.id.rt_text)
     RichText rtText;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
     private DataGenerationRegister dataGenerationRegister;
 
     @BindView(R.id.tv_text)
@@ -32,6 +40,8 @@ public class TwoFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.top_tab_layout)
     TabLayout topTabLayout;
+
+    private TabViewAdapter tabViewAdapter;
 
     @Nullable
     @Override
@@ -87,18 +97,42 @@ public class TwoFragment extends Fragment {
     }
 
     int count;
+    private List<View> views;
 
     private void initTopTab() {
 
 //        ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.colorAccent));
 //        bottomTabLayout.setTabTextColors(colorStateList);
 //        bottomTabLayout.setTabTextColors(getResources().getColor(R.color.grey), getResources().getColor(R.color.orange));
+//        for (int i = 0; i < 3; i++) {
+//            TabLayout.Tab tab = topTabLayout.newTab();
+////            tab.setIcon(getResources().getDrawable(dataGenerationRegister.getTabDrawable(i, false)));
+//            tab.setText(dataGenerationRegister.getTabTopTitle(i));
+//            topTabLayout.addTab(tab);
+//        }
+
+        views = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            TabLayout.Tab tab = topTabLayout.newTab();
-//            tab.setIcon(getResources().getDrawable(dataGenerationRegister.getTabDrawable(i, false)));
-            tab.setText(dataGenerationRegister.getTabTopTitle(i));
-            topTabLayout.addTab(tab);
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_tablayout, null, false);
+            TextView textView=view.findViewById(R.id.tab_txt);
+            textView.setText(String.valueOf(i));
+            views.add(view);
         }
+        tabViewAdapter = new TabViewAdapter(views);
+        viewpager.setAdapter(tabViewAdapter);
+        viewpager.setCurrentItem(0);
+        viewpager.setOffscreenPageLimit(3);
+//        List<Fragment> fragments = new ArrayList<>();
+//        for (int i = 0; i < 3; i++) {
+//            fragments.add(TabLayoutFragment.newInstance(i + 1));
+//        }
+//        TabAdapter adapter = new TabAdapter(getChildFragmentManager(), fragments);
+//        //给ViewPager设置适配器
+//        viewpager.setAdapter(adapter);
+        //将TabLayout和ViewPager关联起来。
+        topTabLayout.setupWithViewPager(viewpager);
+        //设置可以滑动
+//        topTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 
     @Override

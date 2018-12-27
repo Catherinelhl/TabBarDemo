@@ -1,6 +1,5 @@
 package bcaas.io.tabbardemo.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -48,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 4; i++) {
             if (i % 2 == 0) {
                 OneFragment fragment = new OneFragment();
-                fragment.setText(" 当前页面:" + i);
+                Bundle bundle=new Bundle();
+                bundle.putString("args"," 当前页面:\" + i");
+                fragment.setArguments(bundle);
                 fragments.add(fragment);
             } else {
                 TwoFragment twoFragment = new TwoFragment();
