@@ -113,15 +113,17 @@ public class TwoFragment extends Fragment {
 
         views = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_tablayout, null, false);
-            TextView textView=view.findViewById(R.id.tab_txt);
-            textView.setText(String.valueOf(i));
-            views.add(view);
+            TabView tabView = new TabView(getContext());
+            //= LayoutInflater.from(getContext()).inflate(R.layout.fragment_tablayout, null, false);
+            tabView.setTextView(i+"");
+            views.add(tabView);
         }
         tabViewAdapter = new TabViewAdapter(views);
         viewpager.setAdapter(tabViewAdapter);
         viewpager.setCurrentItem(0);
         viewpager.setOffscreenPageLimit(3);
+        topTabLayout.setupWithViewPager(viewpager);
+
 //        List<Fragment> fragments = new ArrayList<>();
 //        for (int i = 0; i < 3; i++) {
 //            fragments.add(TabLayoutFragment.newInstance(i + 1));
@@ -130,7 +132,6 @@ public class TwoFragment extends Fragment {
 //        //给ViewPager设置适配器
 //        viewpager.setAdapter(adapter);
         //将TabLayout和ViewPager关联起来。
-        topTabLayout.setupWithViewPager(viewpager);
         //设置可以滑动
 //        topTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
